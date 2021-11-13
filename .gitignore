@@ -1,0 +1,9 @@
+# dependencies
+node_modules/
+
+# System files
+package-lock.json
+
+# migrations
+migrations/*
+!migrations/.gitkeep
