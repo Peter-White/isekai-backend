@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
 var cors = require('cors');
-var apiRoutes = require('./routes');
+var userRoutes = require('./routes/user');
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded());
 
 app.use(cors());
-app.use('/api', apiRoutes);
+app.use('/api/user', userRoutes);
 
 const PORT = process.env.PORT || 7000;
 
