@@ -1,0 +1,7 @@
+const { Router } = require('express');
+const router = Router();
+
+router.get("/", (req, res) => res.send("Users"));
+router.get("/:id", (req, res) => res.send("User"));
+
+module.exports = router;
