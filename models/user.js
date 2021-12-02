@@ -20,13 +20,30 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     email: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
     },
-    password: DataTypes.STRING,
-    date_registered: DataTypes.DATE,
-    confirmed: DataTypes.BOOLEAN,
-    confirmed_on: DataTypes.DATE,
-    last_update: DataTypes.DATE
+    password: { 
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    date_registered: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    confirmed: { 
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+    },
+    confirmed_on: { 
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    last_update: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'User',
