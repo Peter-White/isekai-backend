@@ -19,11 +19,12 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     date_registered: DataTypes.DATE,
     confirmed: DataTypes.BOOLEAN,
-    confirmed_on: DataTypes.DATE
+    confirmed_on: DataTypes.DATE,
+    last_update: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'User',
-    tableName: 'users'
+    tableName: 'Users'
   });
   return User;
 };
