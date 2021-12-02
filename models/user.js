@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    date_registered: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false
     },
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: true
     },
-    last_update: {
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: false
     }
