@@ -1,4 +1,5 @@
 const {User} = require('../models');
+const fs = require('fs')
 
 const getUsers = async (req, res) => {
     try {
@@ -29,7 +30,33 @@ const getUser = async (req, res) => {
     }
 };
 
+const register = async (req, res) => {
+    try {
+        const newUser = await User.create({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            createdAt: new Date(),
+            confirmed: false,
+            updatedAt: new Date()
+        });
+
+        return res.status(201).json({success: "account created"});
+    } catch(error) {
+        return res.status(403).json({ error: error.message });
+    }
+};
+
+const confirmUser = async(req, res) => {
+    const data = fs.readFileSync('/config/secret.txt', 'utf8');
+    console.log(data);
+    
+    return res.status(201).json({success: "account confirmed"});
+};
+
 module.exports = {
     getUsers,
-    getUser
+    getUser,
+    register,
+    confirmUser
 };
