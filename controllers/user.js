@@ -1,5 +1,6 @@
 const {User} = require('../models');
-const fs = require('fs')
+const fs = require('fs');
+const jwt = require('jsonwebtoken');
 
 const getUsers = async (req, res) => {
     try {
@@ -48,10 +49,33 @@ const register = async (req, res) => {
 };
 
 const confirmUser = async(req, res) => {
-    const data = fs.readFileSync('/config/secret.txt', 'utf8');
-    console.log(data);
+    try {
+        let data = jwt.decode(req.headers.token, fs.readFileSync('./config/key.txt', 'utf8'));
+
+        let user = await User.findByPk(data.id);
     
-    return res.status(201).json({success: "account confirmed"});
+        if(user === null) {
+            res.status(404).json({error: "user not found"});
+        }
+
+        if(user.confirmed) {
+            res.status(406).json({error: "account already confirmed"});
+        }
+
+        await User.update({
+            confirmed: true,
+            confirmed_on: new Date(),
+            updatedAt: new Date()
+        }, {
+            where: {
+                id: data.id
+            }
+        });
+        
+        return res.status(201).json({success: "user updated"});
+    } catch(error) {
+        return res.status(403).json({ error: error.message });
+    }
 };
 
 module.exports = {
